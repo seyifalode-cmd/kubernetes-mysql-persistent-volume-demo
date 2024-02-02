@@ -32,7 +32,7 @@ kill 1
 kubectl exec -it mysql -- /bin/bash
 ```
 
-8. Cnnect to the database using the password provided in the mysql-pod.yml.
+8. Connect to the database using the password provided in the mysql-pod.yml.
 ```bash
 mysql -u root -p
 ```
