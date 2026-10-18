@@ -8,7 +8,10 @@ spec:
     image: mysql:5.7
     env:
     - name: MYSQL_ROOT_PASSWORD
-      value: YUCloudOps20XY!
+      valueFrom:
+        secretKeyRef:      # created with: kubectl create secret generic mysql-root --from-literal=password='<strong-password>'
+          name: mysql-root
+          key: password
     volumeMounts:
     - name: mysql-storage
       mountPath: /var/lib/mysql

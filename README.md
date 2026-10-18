@@ -1,4 +1,8 @@
-**Kubernetes MySQL Persistent Volume Demo** — proving that database state survives pod crashes through Kubernetes persistent volume storage.
+# Kubernetes MySQL Persistent Volume Demo
+
+Oluwaseyi Michael Falode | Cloud & DevOps Engineering | Toronto, ON
+
+Proving that database state survives pod crashes through Kubernetes persistent volume storage.
 
 ---
 
@@ -75,7 +79,10 @@ kubernetes-mysql-persistent-volume-demo/
 
 ### Step 1: Deploy the MySQL pod
 
+The root password is read from a Kubernetes Secret rather than written into the manifest, so create the Secret first:
+
 ```bash
+kubectl create secret generic mysql-root --from-literal=password='<strong-password>'
 kubectl apply -f mysql-pod.yml
 ```
 
@@ -105,7 +112,7 @@ Inside the container shell:
 
 ```bash
 mysql -u root -p
-# Password: YUCloudOps20XY!
+# Password: the value you stored in the mysql-root Secret
 ```
 
 ### Step 5: Create the database, table, and data
@@ -166,7 +173,8 @@ Prerequisites: A running Kubernetes cluster with `kubectl` configured.
 git clone <repo-url>
 cd kubernetes-mysql-persistent-volume-demo
 
-# Deploy the MySQL pod
+# Create the root password Secret, then deploy the MySQL pod
+kubectl create secret generic mysql-root --from-literal=password='<strong-password>'
 kubectl apply -f mysql-pod.yml
 
 # Wait for the pod to be Running
